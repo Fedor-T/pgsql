@@ -19,6 +19,9 @@ int main()
 	a["lastname"] = "aaaa";
 	a["fathername"] = "bbbb";
 
-	author.find(4).print();
+	vector<Author> authors;
+	authors = author.all();
+	for(int i=0;i<authors.size();i++)
+		authors[i].print();
 	return 0;
 }

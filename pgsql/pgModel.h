@@ -76,8 +76,41 @@ public:
 		sql << "INSERT INTO " << tableName;
 		sql << item.insertColumns();
 		sql << item.values()<<';'<<ends;
-		driver->execSQL(sql.str());
-		return false;
+		if(driver->execSQL(sql.str()))
+			return true
+		else
+			return false
+		
+	}
+	
+	vector<ModelName> all()
+	{
+		if(items.size()) return items;
+		strstream sql;
+		sql << "SELECT * FROM ";
+		sql << tableName;
+		sql <<";"<<ends;
+		PGresult *result = driver->selectsDataSQL(sql.str());
+		data itemAttributes;
+		int rows = PQntuples(result);
+		if(rows)
+		{
+			for(int j=0;j<rows;j++)
+			{
+				for (int i=0; i<PQnfields(result); i++)
+				{
+					itemAttributes[PQfname(result, i)] = PQgetvalue(result, j, i);
+				}
+				ModelName item(itemAttributes);
+				items.push_back(item);
+			}
+			PQclear(result);
+		}
+		else
+		{
+			cout<<tableName<<" empty table!"<<endl;
+		}
+		return items;
 	}
 
 	vector<ModelName> items;
