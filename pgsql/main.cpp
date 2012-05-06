@@ -14,6 +14,12 @@ int main()
 	pgAuthor author(dbConnecion.getDriver());
 	Author::printHeader();
 	author.last().printColumns();
-	
+	data a;
+	//test data
+	a["firstname"] = "test";
+	a["lastname"] = "aaaa";
+	a["fathername"] = "bbbb";
+
+	author.create(a);
 	return 0;
 }
