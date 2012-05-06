@@ -12,7 +12,7 @@ Author::Author(data attributes): Model("Author")
 void Author::print()
 {
 	if(modelData["id"] == "0") return;
-	cout<<setw(5)<<modelData["id"]<<"|"<<setw(14)<<modelData["firstName"]<<"|"<<setw(14)<<modelData["lastName"]<<"|"<<setw(14)<<modelData["fatherName"]<<"|"<<endl;
+	cout<<setw(5)<<modelData["id"]<<"|"<<setw(14)<<modelData["firstname"]<<"|"<<setw(14)<<modelData["lastname"]<<"|"<<setw(14)<<modelData["fathername"]<<"|"<<endl;
 }
 
 void Author::printHeader()

@@ -19,11 +19,17 @@ public:
 	void printColumns()
 	{
 		cout<<modelName<<"(";
-		data::iterator iterator;
-		for (iterator = modelData.begin(); iterator != modelData.end(); iterator++)
+		data::iterator iterator = modelData.begin();
+		cout<<iterator->first;
+		iterator++;
+		do
 		{
-			cout<<iterator->first<<", ";
-		}
+			if(iterator->first != "id")
+			{
+				cout<<", ";
+				cout<<iterator->first;
+			}
+		}while(++iterator != modelData.end());
 		cout<<")"<<endl;
 	}
 	

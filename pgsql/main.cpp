@@ -20,6 +20,6 @@ int main()
 	a["lastname"] = "aaaa";
 	a["fathername"] = "bbbb";
 
-	author.create(a);
+	author.find(4).print();
 	return 0;
 }

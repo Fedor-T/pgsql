@@ -32,7 +32,7 @@ public:
 		sql << " WHERE id=";
 		sql << id <<";"<<ends;
 		PGresult *result = driver->selectsDataSQL(sql.str());
-		map<string, string> itemAttributes;
+		data itemAttributes;
 		if(PQntuples(result))
 		{
 			for (int i=0; i<PQnfields(result); i++)
