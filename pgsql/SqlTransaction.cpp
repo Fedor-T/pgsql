@@ -10,7 +10,7 @@ SqlTransaction::~SqlTransaction()
 	if(connectionEstablished()) closeConnection();
 }
 
-void SqlTransaction::establishConnection(char* dbName, char* user, char* password, char* host, char* port)
+void SqlTransaction::establishConnection(string dbName, string user, string password, string host, string port)
 {
 	string sql;
 	sql+="user=";
@@ -63,7 +63,7 @@ void SqlTransaction::selectAuthors()
 	sql.append("SELECT * FROM authors;");
 	PGresult *res = PQexec(connection, sql.c_str());
 	int row_count = PQntuples(res);
-	int	col_count = PQnfields(res);
+	int col_count = PQnfields(res);
 	for(int i=0; i<row_count;i++)
 	{
 		for(int j=0; j<col_count;j++)
