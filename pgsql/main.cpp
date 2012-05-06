@@ -13,6 +13,7 @@ int main()
 	pgConnection dbConnecion;
 	pgAuthor author(dbConnecion.getDriver());
 	Author::printHeader();
-	author.find(1).print();
+	author.last().printColumns();
+	
 	return 0;
 }

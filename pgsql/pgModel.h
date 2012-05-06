@@ -19,11 +19,6 @@ public:
 	}
 	~pgModel(void){}
 
-	void push(ModelName item)
-	{
-		items.push_back(item);
-	}
-
 	int count()
 	{ 
 		return itesm.size();
@@ -53,6 +48,36 @@ public:
 		}
 		ModelName item(itemAttributes);
 		return item;
+	}
+
+	ModelName last()
+	{
+		strstream sql;
+		sql << "SELECT * FROM ";
+		sql << tableName;
+		sql << " ORDER BY id desc LIMIT 1;"<<ends;
+		PGresult *result = driver->selectsDataSQL(sql.str());
+		data itemAttributes;
+		if(PQntuples(result))
+		{
+			for (int i=0; i<PQnfields(result); i++)
+			{
+				itemAttributes[PQfname(result, i)] = PQgetvalue(result, 0, i);
+			}
+			PQclear(result);
+		}
+		ModelName item(itemAttributes);
+		return item;
+	}
+	
+	bool create(ModelName item)
+	{
+		strstream sql;
+		sql << "INSERT INTO " << tableName;
+		sql << item.insertColumns();
+		sql << item.values()<<';'<<ends;
+		driver->execSQL(sql.str());
+		return false;
 	}
 
 	vector<ModelName> items;

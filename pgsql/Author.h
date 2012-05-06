@@ -1,20 +1,17 @@
 #pragma once
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <map>
-using namespace std;
+#include "model.h"
 
-class Author
+class Author : public Model
 {
 public:
-	Author(map<string, string> attributes);
+	Author(data attributes);
 	Author();
 	void print();
 	static void printHeader();
+	string insertColumns();
+	string values();
 	~Author(void);
 private:
-	int id;
 	string firstName;
 	string lastName;
 	string fatherName;
