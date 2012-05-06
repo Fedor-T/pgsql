@@ -1,1 +1,10 @@
 *.out
+Debug/
+include/
+lib/
+pgsql.ncb
+pgsql.sln
+pgsql.suo
+pgsql/Debug/
+pgsql/pgsql.vcproj
+pgsql/pgsql.vcproj.Fedya-notebook.Fedya.user
