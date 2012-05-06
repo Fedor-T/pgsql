@@ -5,27 +5,14 @@
 #pragma comment(lib,"libpq.lib")
 #endif
 
-#include <fstream>
 #include <cstdlib>
-#include "SqlTransaction.h"
-#include "configuration.h"
-
+#include "pgConnection.h"
+#include "pgAuthor.h"
 int main()
 {
-	configuration::data appconfig;
-	ifstream cfgfile("config.cfg");
-	cfgfile >> appconfig;
-	cfgfile.close();
-
-	SqlTransaction sql;
-	sql.establishConnection(appconfig["dbname"], appconfig["user"], appconfig["password"]);
-	cout << "Connection to database - ";
-	if(sql.connectionEstablished() != true)
-	{
-		cout << "FAILED" << endl;
-		sql.closeConnection();
-		exit(1);
-	}
-	cout << "OK" << endl;
+	pgConnection dbConnecion;
+	pgAuthor author(dbConnecion.getDriver());
+	int i = 1;
+	author.find(i).print();
 	return 0;
 }
