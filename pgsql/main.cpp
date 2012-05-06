@@ -5,17 +5,20 @@
 #pragma comment(lib,"libpq.lib")
 #endif
 
+#include <fstream>
 #include <cstdlib>
 #include "SqlTransaction.h"
-
-char* DBNAME = "library";
-char* USER = "pgadmin";
-char* PASSWORD = "pgadmin";
+#include "configuration.h"
 
 int main()
 {
+	configuration::data appconfig;
+	ifstream cfgfile("config.cfg");
+	cfgfile >> appconfig;
+	cfgfile.close();
+
 	SqlTransaction sql;
-	sql.establishConnection(DBNAME, USER, PASSWORD);
+	sql.establishConnection(appconfig["dbname"], appconfig["user"], appconfig["password"]);
 	cout << "Connection to database - ";
 	if(sql.connectionEstablished() != true)
 	{
