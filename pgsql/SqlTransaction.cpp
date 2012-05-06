@@ -1,17 +1,37 @@
 #include "SqlTransaction.h"
 
-SqlTransaction::SqlTransaction(char* dbName, char* password)
+SqlTransaction::SqlTransaction()
 {
-	string sql;
-	sql+="user=postgres password=";
-	sql+=password;
-	sql+=" dbname=";
-	sql+=dbName;
-	sql+=" host=127.0.0.1 port=5432";
-	connection = PQconnectdb(sql.c_str());
+
 }
 
 SqlTransaction::~SqlTransaction()
+{
+	if(connectionEstablished()) closeConnection();
+}
+
+void SqlTransaction::establishConnection(char* dbName, char* user, char* password, char* host, char* port)
+{
+	string sql;
+	sql+="user=";
+	sql+=user;
+	sql+=" password=";
+	sql+=password;
+	sql+=" dbname=";
+	sql+=dbName;
+	sql+=" host=";
+	sql+=host;
+	sql+=" port=";
+	sql+=port;
+	connection = PQconnectdb(sql.c_str());
+}
+
+int SqlTransaction::connectionEstablished()
+{
+	return (PQstatus(connection) == CONNECTION_OK);
+}
+
+void SqlTransaction::closeConnection()
 {
 	PQfinish(connection);
 }
