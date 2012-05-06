@@ -13,7 +13,6 @@ int main()
 	pgConnection dbConnecion;
 	pgAuthor author(dbConnecion.getDriver());
 	Author::printHeader();
-	author.last().printColumns();
 	data a;
 	//test data
 	a["firstname"] = "test";

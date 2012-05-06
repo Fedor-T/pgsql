@@ -33,7 +33,31 @@ public:
 		cout<<")"<<endl;
 	}
 	
-	virtual void print()=0;
+	virtual void print()
+	{
+		data::iterator iterator = modelData.begin();
+		cout<<setw(15)<<modelData[iterator->first];
+		iterator++;
+		do
+		{
+			cout<<", ";
+			cout<<setw(15)<<modelData[iterator->first];
+		}while(++iterator != modelData.end());
+		cout<<endl;
+	}
+	virtual void printHeader()
+	{
+		data::iterator iterator = modelData.begin();
+		cout<<setw(15)<<iterator->first;
+		iterator++;
+		do
+		{
+			cout<<", ";
+			cout<<setw(15)<<iterator->first;
+		}while(++iterator != modelData.end());
+		cout<<endl;
+	}
+
 	string insertColumns()
 	{
 		strstream result;
@@ -42,11 +66,8 @@ public:
 		iterator++;
 		do
 		{
-			if(iterator->first != "id")
-			{
-				result<<", ";
-				result<<iterator->first;
-			}
+			result<<", ";
+			result<<iterator->first;
 		}while(++iterator != modelData.end());
 		result<<") "<<ends;
 		cout<<result.str();
