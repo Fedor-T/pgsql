@@ -1,6 +1,5 @@
 #include "SqlTransaction.h"
 
-
 SqlTransaction::SqlTransaction(char* dbName, char* password)
 {
 	string sql;
@@ -10,7 +9,7 @@ SqlTransaction::SqlTransaction(char* dbName, char* password)
 	sql+=dbName;
 	sql+=" host=127.0.0.1 port=5432";
 	connection = PQconnectdb(sql.c_str());
-}	
+}
 
 SqlTransaction::~SqlTransaction()
 {
