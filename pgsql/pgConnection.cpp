@@ -24,10 +24,10 @@ pgConnection::pgConnection(void)
 	if(connectionEstablished())
 	{
 		initDriver();
-		cout<<"connection success";
+		cout<<"connection success"<<endl;
 	}
 	else{
-		cout<<"connection failed";
+		cout<<"connection failed"<<endl;
 		exit(1);
 	}
 }
@@ -37,7 +37,7 @@ pgConnection::~pgConnection(void)
 	if(connectionEstablished())
 	{
 		PQfinish(connection);	
-		cout<<"connection closed";
+		cout<<"connection closed"<<endl;
 	}
 }
 

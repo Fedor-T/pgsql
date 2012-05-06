@@ -12,7 +12,7 @@ int main()
 {
 	pgConnection dbConnecion;
 	pgAuthor author(dbConnecion.getDriver());
-	int i = 1;
-	author.find(i).print();
+	Author::printHeader();
+	author.find(1).print();
 	return 0;
 }
