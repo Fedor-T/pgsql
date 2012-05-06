@@ -15,14 +15,14 @@ char* PASSWORD = "pgadmin";
 int main()
 {
 	SqlTransaction sql;
-  sql.establishConnection(DBNAME, USER, PASSWORD);
+	sql.establishConnection(DBNAME, USER, PASSWORD);
 	cout << "Connection to database - ";
-  if(sql.connectionEstablished() != true)
-  {
-    cout << "FAILED" << endl;
-    sql.closeConnection();
-    exit(1);
-  }
-  cout << "OK" << endl;
+	if(sql.connectionEstablished() != true)
+	{
+		cout << "FAILED" << endl;
+		sql.closeConnection();
+		exit(1);
+	}
+	cout << "OK" << endl;
 	return 0;
 }
