@@ -14,7 +14,6 @@ public:
 	pgDriver(PGconn *conn);
 	PGresult* execSQL(std::string sql);
 	PGresult* selectsDataSQL(std::string sql);
-	~pgDriver(void);
 private:
 	PGconn *connection;
 };

@@ -28,7 +28,3 @@ PGresult* pgDriver::execSQL(std::string sql)
     }else
 		return result;
 }
-
-pgDriver::~pgDriver(void)
-{
-}
