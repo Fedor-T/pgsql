@@ -1,1 +1,5 @@
 TODO: add to readme.rdoc linux compilation string
+
+TODO: fix all errors for compiling in linux
+
+TODO: write makefile
