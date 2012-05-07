@@ -82,7 +82,24 @@ public:
 			return false
 		
 	}
+
+	bool update(ModelName item)
+	{
+		//TODO: write
+		return false;
+	}
 	
+	bool destroy(int id)
+	{
+		strstream sql;
+		sql<<"DELETE FROM "<< tableName;
+		sql<<" WHERE id="<<id<<";"<<ends;
+		if(driver->execSQL(sql.str()))
+			return true;
+		else
+			return false;
+	}
+
 	vector<ModelName> all()
 	{
 		if(items.size()) return items;
