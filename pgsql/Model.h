@@ -66,18 +66,20 @@ public:
 		iterator++;
 		do
 		{
-			result<<", ";
-			result<<iterator->first;
+			if(iterator->first != "id")
+			{
+				result<<", ";
+				result<<iterator->first;
+			}
 		}while(++iterator != modelData.end());
 		result<<") "<<ends;
-		cout<<result.str();
 		return result.str();
 	}
 
 	string values(){
 		strstream result;
 		data::iterator iterator = modelData.begin();
-		result<< "VALUES("<<"\'"<<modelData[iterator->first]<<"\'";
+		result<< "("<<"\'"<<modelData[iterator->first]<<"\'";
 		iterator++;
 		do
 		{
@@ -88,8 +90,19 @@ public:
 			}
 		}while(++iterator != modelData.end());
 		result<<") "<<ends;
-		cout<<result.str();
 		return result.str();
+	}
+
+	string updateValues()
+	{
+		strstream result;
+		result<< insertColumns()<<"=";
+		result<< values()<<ends;
+		return result.str();
+	}
+	int getId()
+	{
+		return atoi(modelData["id"].c_str());
 	}
 protected:
 	data modelData;

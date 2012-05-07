@@ -15,10 +15,10 @@ int main()
 	Author::printHeader();
 	data a;
 	//test data
-	a["firstname"] = "test";
-	a["lastname"] = "aaaa";
-	a["fathername"] = "bbbb";
-
+	a["firstname"] = "ttttttttt";
+	a["lastname"] = "ffffffff";
+	a["fathername"] = "ddddddddd";
+	a["id"] = "2";
 	vector<Author> authors;
 	authors = author.all();
 	for(int i=0;i<authors.size();i++)

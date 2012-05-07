@@ -75,7 +75,7 @@ public:
 		strstream sql;
 		sql << "INSERT INTO " << tableName;
 		sql << item.insertColumns();
-		sql << item.values()<<';'<<ends;
+		sql <<" VALUES"<< item.values()<<';'<<ends;
 		if(driver->execSQL(sql.str()))
 			return true
 		else
@@ -85,8 +85,15 @@ public:
 
 	bool update(ModelName item)
 	{
-		//TODO: write
-		return false;
+		strstream sql;
+		sql<<"UPDATE "<<tableName;
+		sql<<" SET "<<item.updateValues();
+		sql<<" WHERE id="<<item.getId();
+		sql<<";"<<ends;
+		if(driver->execSQL(sql.str()))
+			return true;
+		else
+			return false;
 	}
 	
 	bool destroy(int id)
@@ -106,7 +113,7 @@ public:
 		strstream sql;
 		sql << "SELECT * FROM ";
 		sql << tableName;
-		sql <<";"<<ends;
+		sql <<" ORDER BY id;"<<ends;
 		PGresult *result = driver->selectsDataSQL(sql.str());
 		data itemAttributes;
 		int rows = PQntuples(result);
