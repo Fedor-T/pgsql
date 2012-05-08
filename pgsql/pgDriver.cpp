@@ -9,11 +9,11 @@ PGresult* pgDriver::selectsDataSQL(std::string sql)
 {
 	PGresult *result = PQexec(connection, sql.c_str());
 	if (PQresultStatus(result) != PGRES_TUPLES_OK)
-    {
+	{
 		std::cout<<PQerrorMessage(connection)<<std::endl;
 		PQclear(result);
 		return 0;
-    }else
+	}else
 		return result;
 }
 

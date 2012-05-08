@@ -1,9 +1,8 @@
 #pragma once
 #include <vector>
-#include <map>
-#include <string>
-#include <strstream>
-#include "pgdriver.h"
+#include "pgDriver.h"
+#include "Model.h"
+
 using namespace std;
 
 template <class ModelName>
@@ -12,7 +11,7 @@ class pgModel
 	string tableName;
 	pgDriver *driver;
 public:
-	pgModel(pgDriver *pgdriver, char* tname)
+	pgModel(pgDriver *pgdriver, string tname)
 	{
 		driver = pgdriver;
 		tableName = tname;
@@ -21,12 +20,12 @@ public:
 
 	int count()
 	{ 
-		return itesm.size();
+		return items.size();
 	}
 
 	ModelName find(int id)
 	{
-		strstream sql;
+		stringstream sql;
 		sql << "SELECT * FROM ";
 		sql << tableName;
 		sql << " WHERE id=";
@@ -52,7 +51,7 @@ public:
 
 	ModelName last()
 	{
-		strstream sql;
+		stringstream sql;
 		sql << "SELECT * FROM ";
 		sql << tableName;
 		sql << " ORDER BY id desc LIMIT 1;"<<ends;
@@ -72,20 +71,20 @@ public:
 	
 	bool create(ModelName item)
 	{
-		strstream sql;
+		stringstream sql;
 		sql << "INSERT INTO " << tableName;
 		sql << item.insertColumns();
 		sql <<" VALUES"<< item.values()<<';'<<ends;
 		if(driver->execSQL(sql.str()))
-			return true
+			return true;
 		else
-			return false
+			return false;
 		
 	}
 
 	bool update(ModelName item)
 	{
-		strstream sql;
+		stringstream sql;
 		sql<<"UPDATE "<<tableName;
 		sql<<" SET "<<item.updateValues();
 		sql<<" WHERE id="<<item.getId();
@@ -98,7 +97,7 @@ public:
 	
 	bool destroy(int id)
 	{
-		strstream sql;
+		stringstream sql;
 		sql<<"DELETE FROM "<< tableName;
 		sql<<" WHERE id="<<id<<";"<<ends;
 		if(driver->execSQL(sql.str()))
@@ -110,7 +109,7 @@ public:
 	vector<ModelName> all()
 	{
 		if(items.size()) return items;
-		strstream sql;
+		stringstream sql;
 		sql << "SELECT * FROM ";
 		sql << tableName;
 		sql <<" ORDER BY id;"<<ends;

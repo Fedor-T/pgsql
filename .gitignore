@@ -1,6 +1,9 @@
 *.out
 *.cfg
 *.gch
+*.o
+bin/
+
 Debug/
 include/
 lib/

@@ -2,8 +2,9 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <strstream>
+#include <sstream>
 #include <map>
+#include <cstdlib>
 using namespace std;
 
 struct data: map<string, string>{};
@@ -60,7 +61,7 @@ public:
 
 	string insertColumns()
 	{
-		strstream result;
+		stringstream result;
 		data::iterator iterator = modelData.begin();
 		result<< "("<<iterator->first;
 		iterator++;
@@ -72,12 +73,12 @@ public:
 				result<<iterator->first;
 			}
 		}while(++iterator != modelData.end());
-		result<<") "<<ends;
+		result<<") ";
 		return result.str();
 	}
 
 	string values(){
-		strstream result;
+		stringstream result;
 		data::iterator iterator = modelData.begin();
 		result<< "("<<"\'"<<modelData[iterator->first]<<"\'";
 		iterator++;
@@ -89,13 +90,13 @@ public:
 				result<<"\'"<<modelData[iterator->first]<<"\'";
 			}
 		}while(++iterator != modelData.end());
-		result<<") "<<ends;
+		result<<") ";
 		return result.str();
 	}
 
 	string updateValues()
 	{
-		strstream result;
+		stringstream result;
 		result<< insertColumns()<<"=";
 		result<< values()<<ends;
 		return result.str();

@@ -1,14 +1,19 @@
 #include "pgConnection.h"
 #include <fstream>
+#include <cstdlib>
 #include "configuration.h"
 
 pgConnection::pgConnection(void)
 {
 	configuration::data config;
-	ifstream cfgfile("config.cfg");
+	ifstream cfgfile("./config.cfg");
+	if(!cfgfile)
+	{
+	  cout<<"Load config fail, check file config.cfg or run app from bin catalog pwd-> $user/$path/pgsql/bin"<<endl;
+	  exit(1);
+	}
 	cfgfile >> config;
 	cfgfile.close();
-
 	string sql;
 	sql+="user=";
 	sql+=config["user"];

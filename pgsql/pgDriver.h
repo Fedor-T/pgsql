@@ -4,8 +4,8 @@
 #include <libpq-fe.h>
 #include <string>
 #else
-#include <postgresql/libpq-fe.h>
-#include <string.h>
+#include <libpq-fe.h>
+#include <string>
 #endif
 
 class pgDriver
