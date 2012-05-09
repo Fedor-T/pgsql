@@ -1,10 +1,19 @@
 clone repo:
+
 git clone git@github.com:Fabel/pgsql.git
+
 cd pgsql
 
+
+
 compilation:
+
 make
 
+
+
 run:
+
 cd bin
+
 ./pgsql-bin
