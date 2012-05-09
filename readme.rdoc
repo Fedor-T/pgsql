@@ -1,5 +1,10 @@
-TODO: add to readme.rdoc linux compilation string
+clone repo:
+git clone git@github.com:Fabel/pgsql.git
+cd pgsql
 
-TODO: fix all errors for compiling in linux
+compilation:
+make
 
-TODO: write makefile
+run:
+cd bin
+./pgsql-bin
