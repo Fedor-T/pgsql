@@ -11,5 +11,5 @@ pgsql.ncb
 pgsql.sln
 pgsql.suo
 pgsql/Debug/
-pgsql/pgsql.vcproj
-pgsql/pgsql.vcproj.Fedya-notebook.Fedya.user
+*.vcproj
+*.vcproj.Fedya-notebook.Fedya.user
