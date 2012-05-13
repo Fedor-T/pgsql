@@ -1,5 +1,5 @@
-dbname=dbname
-user=user
-password=password
-host=host
-port=port
+dbname=your-db-name
+user=your-user
+password=your-password
+host=127.0.0.1
+port=5432
