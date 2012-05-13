@@ -8,6 +8,7 @@ using namespace std;
 template <class ModelName>
 class pgModel
 {
+protected:
 	string tableName;
 	pgDriver *driver;
 public:
@@ -135,6 +136,28 @@ public:
 		}
 		return items;
 	}
+	
+protected:
+  
+	string where(string model, string condition)
+	{
+		stringstream sql;
+		sql << "SELECT * FROM ";
+		sql << model;
+		sql <<" WHERE ";
+		sql<<condition<<";"<<ends;
+		return sql.str();
+	}
 
-	vector<ModelName> items;
+	string where(string condition)
+	{
+		stringstream sql;
+		sql << "SELECT * FROM ";
+		sql << tableName;
+		sql <<" WHERE ";
+		sql<<condition<<";"<<ends;
+		return sql.str();
+	}
+	
+	vector<ModelName> items;	
 };

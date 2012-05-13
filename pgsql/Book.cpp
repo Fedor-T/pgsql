@@ -8,3 +8,12 @@ Book::Book(data attributes): Model("Book")
 		modelData[iterator->first] = iterator->second;
 	}
 }
+
+string Book::authorsCondition()
+{
+	stringstream condition;
+	condition<<" id in (SELECT author_id FROM authors_books WHERE book_id = ";
+	condition<<modelData["id"];
+	condition<<")"<<ends;
+	return condition.str();
+}

@@ -2,3 +2,30 @@
 
 pgBook::pgBook(pgDriver *driver):pgModel(driver, "books"){}
 pgBook::pgBook(pgDriver *driver, string tname):pgModel(driver, tname){}
+
+vector<Author> pgBook::authorsFor(Book book)
+{
+	string sql = where("authors", book.authorsCondition());
+	PGresult *result = driver->selectsDataSQL(sql);
+	data itemAttributes;
+	vector<Author> authors;
+	int rows = PQntuples(result);
+	if(rows)
+	{
+		for(int j=0;j<rows;j++)
+		{
+			for (int i=0; i<PQnfields(result); i++)
+			{
+				itemAttributes[PQfname(result, i)] = PQgetvalue(result, j, i);
+			}
+			Author item(itemAttributes);
+			authors.push_back(item);
+		}
+		PQclear(result);
+	}
+	else
+	{
+		cout<<"Authors don\'t exist!"<<endl;
+	}
+	return authors;
+}
