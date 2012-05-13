@@ -17,3 +17,12 @@ string Book::authorsCondition()
 	condition<<")"<<ends;
 	return condition.str();
 }
+
+string Book::areasCondition()
+{
+	stringstream condition;
+	condition<<" id in (SELECT area_id FROM areas_books WHERE book_id = ";
+	condition<<modelData["id"];
+	condition<<")"<<ends;
+	return condition.str();
+}

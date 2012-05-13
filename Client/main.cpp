@@ -8,6 +8,7 @@ int main()
 	pgConnection bdConnection;
 	pgBook book(bdConnection.getDriver());
 	pgAuthor author(bdConnection.getDriver());
+	pgArea area(bdConnection.getDriver());
 
 	data a;
 	a["isbn"] = "123";
@@ -18,10 +19,12 @@ int main()
 	a["pages"] = "42";
 	a["count"] = "42";
 	a["cost"] = "100500";
-  
+
 	Book item = book.last();
 	book.addAuthorToBook(item, author.find("3"));
-	
+	book.addAreaToBook(item, area.first());
+	book.addAreaToBook(item, area.last());
+
 	vector<Book> books = book.all();
 	vector<Book>::iterator i_book;
 	if(books.size())
@@ -35,6 +38,14 @@ int main()
 		authors[0].printHeader();
 	for( i_author = authors.begin(); i_author != authors.end(); i_author++)
 		i_author->print();
+
+	vector<Area> areas = book.areasFor(item);
+	vector<Area>::iterator i_area;
+	if(areas.size())
+		areas[0].printHeader();
+	for( i_area = areas.begin(); i_area != areas.end(); i_area++)
+		i_area->print();
+
 /*
 	// test author
 	pgAuthor author(bdConnection.getDriver());

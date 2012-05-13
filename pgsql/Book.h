@@ -7,4 +7,5 @@ public:
 	Book(void);
 	Book(data attribute);
 	string authorsCondition();
+	string areasCondition();
 };
