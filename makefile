@@ -68,6 +68,10 @@ uninstall:
 		echo "app didn't install" ;\
 	fi
 
+rebuild : clean libpgsql pgsql-bin
+	@echo "rebuild complite"
+	sudo make install
+
 .PHONY : clean   
 clean :   
 	rm -f *.o bin pgsql/*.gch -r
