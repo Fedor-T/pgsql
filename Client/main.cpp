@@ -3,85 +3,80 @@
 #pragma comment(lib, "pgsql.lib")
 #endif
 #include "activepg.h"
+
+void printMenu();
+void addBook(pgBook &bookModel);
+void list(pgBook &bookModel);
+void remove();
+
 int main()
 {
 	pgConnection bdConnection;
-	pgBook book(bdConnection.getDriver());
-	pgAuthor author(bdConnection.getDriver());
-	pgArea area(bdConnection.getDriver());
-
-	data a;
-	a["isbn"] = "123";
-	a["title"] = "bool";
-	a["publisher"] = "Minsk";
-	a["publisher_location"] = "Belarus";
-	a["year"] = "1990";
-	a["pages"] = "42";
-	a["count"] = "42";
-	a["cost"] = "100500";
-
-	Book item = book.last();
-	book.addAuthorToBook(item, author.find("3"));
-	book.addAreaToBook(item, area.first());
-	book.addAreaToBook(item, area.last());
-
-	vector<Book> books = book.all();
-	vector<Book>::iterator i_book;
-	if(books.size())
-		books[0].printHeader();
-	for( i_book = books.begin(); i_book != books.end(); i_book++)
-		i_book->print();
-
-	vector<Author> authors = book.authorsFor(item);
-	vector<Author>::iterator i_author;
-	if(authors.size())
-		authors[0].printHeader();
-	for( i_author = authors.begin(); i_author != authors.end(); i_author++)
-		i_author->print();
-
-	vector<Area> areas = book.areasFor(item);
-	vector<Area>::iterator i_area;
-	if(areas.size())
-		areas[0].printHeader();
-	for( i_area = areas.begin(); i_area != areas.end(); i_area++)
-		i_area->print();
-
-/*
-	// test author
-	pgAuthor author(bdConnection.getDriver());
-	vector<Author> authors = author.all();
-	vector<Author>::iterator i_author;
-	if(authors.size())
-		authors[0].printHeader();
-	for( i_author = authors.begin(); i_author != authors.end(); i_author++)
-		i_author->print();
-
-	// test book
-	pgBook book(bdConnection.getDriver());
-	vector<Book> books = book.all();
-	vector<Book>::iterator i_book;
-	if(books.size())
-		books[0].printHeader();
-	for( i_book = books.begin(); i_book != books.end(); i_book++)
-		i_book->print();
-
-	// test area
-	pgArea area(bdConnection.getDriver());
-	vector<Area> areas = area.all();
-	vector<Area>::iterator i_area;
-	if(areas.size())
-		areas[0].printHeader();
-	for( i_area = areas.begin(); i_area != areas.end(); i_area++)
-		i_area->print();
-
-	// test instance
-	pgInstance instance(bdConnection.getDriver());
-	vector<Instance> instances = instance.all();
-	vector<Instance>::iterator i_instance;
-	if(instances.size())
-		instances[0].printHeader();
-	for( i_instance = instances.begin(); i_instance != instances.end(); i_instance++)
-		i_instance->print();
-*/
+	pgBook bookModel(bdConnection.getDriver());
+	pgAuthor Author(bdConnection.getDriver());
+	
+	int choice=1;
+	while(choice)
+	{
+		  printMenu();
+		  cin>>choice;
+		  cin.sync();
+		  switch(choice)
+		  {
+				case 1:
+				  list(bookModel);
+				  break;
+				case 2:
+				  addBook(bookModel);
+				  break;
+				case 3:
+				  cout<<"remove";
+				  break;
+				case 0:
+				  cout<<"exit";
+				  break;
+		  }
+	}
 	return 0;
+}
+
+void printMenu()
+{
+	cout<<endl;
+	for(int i=0;i<80; i++)
+		  cout<<"_";
+	cout<<endl;
+	cout<<"1: Book list."<<endl;
+	cout<<"2: Add book."<<endl;
+	cout<<"3: Remov book."<<endl;
+	cout<<"0: Exit."<<endl<<endl;
+}
+
+void list(pgBook &bookModel)
+{
+	vector<Book> books = bookModel.all();
+	vector<Book>::iterator i_book;
+	if(books.size())
+		books[0].printHeader();
+	for( i_book = books.begin(); i_book != books.end(); i_book++)
+		i_book->print();
+}
+
+void addBook(pgBook &bookModel)
+{
+	vector<string> fields = bookModel.last().getFields();
+	data a;
+	string tmp;
+	vector<string>::iterator iter;
+
+	for(iter = fields.begin(); iter != fields.end(); iter++)
+	{
+		cout<<"Type "<<iter->c_str()<<": ";
+		cout.flush();
+		cin.sync();
+		getline(cin, tmp); 
+		a[iter->c_str()] = tmp;
+	}
+	Book book(a);
+	bookModel.create(book);
 }

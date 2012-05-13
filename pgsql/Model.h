@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <map>
+#include <vector>
 #include <cstdlib>
 using namespace std;
 
@@ -105,6 +106,23 @@ public:
 	{
 		return modelData["id"];
 	}
+
+	vector<string> getFields()
+	{
+		vector<string> result;
+		data::iterator iterator = modelData.begin();
+		result.push_back(iterator->first);
+		iterator++;
+		do
+		{
+			if(iterator->first != "id")
+			{
+				result.push_back(iterator->first);
+			}
+		}while(++iterator != modelData.end());
+		return result;
+	}
+	
 	void setId(string id)
 	{
 	  modelData["id"] = id;

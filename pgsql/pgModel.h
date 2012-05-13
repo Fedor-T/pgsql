@@ -136,7 +136,7 @@ public:
 
 	vector<ModelName> all()
 	{
-		if(items.size()) return items;
+		if(items.size()) items.clear();
 		stringstream sql;
 		sql << "SELECT * FROM ";
 		sql << tableName;
