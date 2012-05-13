@@ -39,14 +39,14 @@ pgAuthor.o : pgsql/pgAuthor.cpp pgsql/pgAuthor.h
 	g++ -fPIC -c pgsql/pgAuthor.cpp pgsql/pgAuthor.h $(links)
 
 install:
-	cp bin/libpgsql.so /usr/lib/
-	echo "app instaled run cd bin && ./pgsql-bin";\
+	cp bin/libpgsql.so /usr/lib/ 
+	@echo "app instaled run cd bin && ./pgsql-bin" 
 
 uninstall:
 	@if [  -e /usr/lib/libpgsql.so ]; \
 	then \
 		rm /usr/lib/libpgsql.so;\
-		echo "app installed" ;\
+		echo "app uninstalled" ;\
 	else \
 		echo "app didn't install" ;\
 	fi
