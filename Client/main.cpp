@@ -7,7 +7,7 @@ int main()
 {
 	pgConnection bdConnection;
 	pgAuthor author(bdConnection.getDriver());
-	pgBook books(bdConnection.getDriver());
+	// pgBook books(bdConnection.getDriver());
 	data a;
 	//test data
 	vector<Author> authors = author.all();
@@ -15,6 +15,6 @@ int main()
 	authors[0].printHeader();
 	for( iterator = authors.begin(); iterator != authors.end(); iterator++)
 		iterator->print();
-	books.last().printHeader();
+	// books.last().printHeader();
 	return 0;
 }
