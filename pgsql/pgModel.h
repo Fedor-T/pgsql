@@ -23,7 +23,7 @@ public:
 		return items.size();
 	}
 
-	ModelName find(int id)
+	ModelName find(string id)
 	{
 		stringstream sql;
 		sql << "SELECT * FROM ";
