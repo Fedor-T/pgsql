@@ -41,7 +41,7 @@ pgConnection::~pgConnection(void)
 {
 	if(connectionEstablished())
 	{
-		PQfinish(connection);	
+		PQfinish(connection);
 		cout<<"connection closed"<<endl;
 	}
 }
@@ -57,9 +57,5 @@ bool pgConnection::connectionEstablished()
 }
 int pgConnection::initDriver()
 {
-	driver = new pgDriver(connection);
-	if(driver)
-		return 1;
-	else
-		return 0;
+	return (driver = new pgDriver(connection))? 1 : 0;
 }
