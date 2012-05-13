@@ -20,7 +20,8 @@ int main()
 	{
 		  printMenu();
 		  cin>>choice;
-		  cin.sync();
+		  cin.clear();
+		  cin.ignore(cin.rdbuf()->in_avail());
 		  switch(choice)
 		  {
 				case 1:
@@ -68,12 +69,12 @@ void addBook(pgBook &bookModel)
 	data a;
 	string tmp;
 	vector<string>::iterator iter;
-
+	getline(cin, tmp);
 	for(iter = fields.begin(); iter != fields.end(); iter++)
 	{
+		cin.clear();
+		cin.ignore(cin.rdbuf()->in_avail());
 		cout<<"Type "<<iter->c_str()<<": ";
-		cout.flush();
-		cin.sync();
 		getline(cin, tmp); 
 		a[iter->c_str()] = tmp;
 	}
