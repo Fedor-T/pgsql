@@ -1,4 +1,4 @@
-objects = pgDriver.o  pgConnection.o Author.o pgAuthor.o Area.o pgArea.o Instance.o pgInstance.o Book.o pgBook.o
+objects = pgDriver.o  pgConnection.o Author.o pgAuthor.o Area.o pgArea.o Instance.o pgInstance.o Book.o pgBook.o AuthorsBooks.o pgAuthorsBooks.o
 
 links = -I /usr/include/postgresql -l pq 
 INSTDIR = bin/
@@ -54,6 +54,12 @@ Book.o : pgsql/Book.cpp pgsql/Book.h
 
 pgBook.o : pgsql/pgBook.cpp pgsql/pgBook.h 
 	g++ -fPIC -c pgsql/pgBook.cpp pgsql/pgBook.h $(links)
+
+AuthorsBooks.o : pgsql/AuthorsBooks.cpp pgsql/AuthorsBooks.h
+	g++ -fPIC -c pgsql/AuthorsBooks.cpp pgsql/AuthorsBooks.h $(links)
+
+pgAuthorsBooks.o : pgsql/pgAuthorsBooks.cpp pgsql/pgAuthorsBooks.h
+	g++ -fPIC -c pgsql/pgAuthorsBooks.cpp pgsql/pgAuthorsBooks.h $(links)
 
 install:
 	cp bin/libpgsql.so /usr/lib/ 
