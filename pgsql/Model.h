@@ -101,9 +101,13 @@ public:
 		result<< values()<<ends;
 		return result.str();
 	}
-	int getId()
+	string getId()
 	{
-		return atoi(modelData["id"].c_str());
+		return modelData["id"];
+	}
+	void setId(string id)
+	{
+	  modelData["id"] = id;
 	}
 protected:
 	data modelData;

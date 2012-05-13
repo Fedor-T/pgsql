@@ -1,3 +1,4 @@
+#pragma once
 #include "Model.h"
 
 class AuthorsBooks : public Model

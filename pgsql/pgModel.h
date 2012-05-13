@@ -69,18 +69,41 @@ public:
 		ModelName item(itemAttributes);
 		return item;
 	}
+
+	ModelName first()
+	{
+		stringstream sql;
+		sql << "SELECT * FROM ";
+		sql << tableName;
+		sql << " ORDER BY id LIMIT 1;"<<ends;
+		PGresult *result = driver->selectsDataSQL(sql.str());
+		data itemAttributes;
+		if(PQntuples(result))
+		{
+			for (int i=0; i<PQnfields(result); i++)
+			{
+				itemAttributes[PQfname(result, i)] = PQgetvalue(result, 0, i);
+			}
+			PQclear(result);
+		}
+		ModelName item(itemAttributes);
+		return item;
+	}
 	
-	bool create(ModelName item)
+	bool create(ModelName &item)
 	{
 		stringstream sql;
 		sql << "INSERT INTO " << tableName;
 		sql << item.insertColumns();
 		sql <<" VALUES"<< item.values()<<';'<<ends;
 		if(driver->execSQL(sql.str()))
+		{
+			ModelName tmp = last();
+			item.setId(tmp.getId());
 			return true;
+		}
 		else
 			return false;
-		
 	}
 
 	bool update(ModelName item)
@@ -91,7 +114,11 @@ public:
 		sql<<" WHERE id="<<item.getId();
 		sql<<";"<<ends;
 		if(driver->execSQL(sql.str()))
+		{
+			ModelName tmp = last();
+			item.setId(tmp.getId());
 			return true;
+		}
 		else
 			return false;
 	}

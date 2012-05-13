@@ -6,8 +6,36 @@
 int main()
 {
 	pgConnection bdConnection;
-	data a;
+	pgBook book(bdConnection.getDriver());
+	pgAuthor author(bdConnection.getDriver());
 
+	data a;
+	a["isbn"] = "123";
+	a["title"] = "bool";
+	a["publisher"] = "Minsk";
+	a["publisher_location"] = "Belarus";
+	a["year"] = "1990";
+	a["pages"] = "42";
+	a["count"] = "42";
+	a["cost"] = "100500";
+  
+	Book item = book.last();
+	book.addAuthorToBook(item, author.find("3"));
+	
+	vector<Book> books = book.all();
+	vector<Book>::iterator i_book;
+	if(books.size())
+		books[0].printHeader();
+	for( i_book = books.begin(); i_book != books.end(); i_book++)
+		i_book->print();
+
+	vector<Author> authors = book.authorsFor(item);
+	vector<Author>::iterator i_author;
+	if(authors.size())
+		authors[0].printHeader();
+	for( i_author = authors.begin(); i_author != authors.end(); i_author++)
+		i_author->print();
+/*
 	// test author
 	pgAuthor author(bdConnection.getDriver());
 	vector<Author> authors = author.all();
@@ -43,6 +71,6 @@ int main()
 		instances[0].printHeader();
 	for( i_instance = instances.begin(); i_instance != instances.end(); i_instance++)
 		i_instance->print();
-
+*/
 	return 0;
 }

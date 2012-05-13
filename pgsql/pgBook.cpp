@@ -29,3 +29,13 @@ vector<Author> pgBook::authorsFor(Book book)
 	}
 	return authors;
 }
+
+void pgBook::addAuthorToBook(Book book, Author author)
+{
+	pgAuthorsBooks authorsBooksRelation(this->driver);
+	data authorBookData;
+	authorBookData["author_id"] = author.getId();
+	authorBookData["book_id"] = book.getId();
+	AuthorsBooks item(authorBookData);
+	authorsBooksRelation.create(item);
+}
