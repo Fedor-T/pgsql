@@ -6,6 +6,4 @@ class Instance : public Model
 public:
 	Instance(data attributes);
 	Instance();
-	void print();
-	void printHeader();
 };

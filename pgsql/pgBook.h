@@ -1,7 +1,6 @@
 #pragma once
-#include "pgmodel.h"
+#include "pgModel.h"
 #include "Book.h"
-#include "pgAuthor.h"
 
 class pgBook : public pgModel<Book>
 {
