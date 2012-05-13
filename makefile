@@ -70,4 +70,4 @@ uninstall:
 
 .PHONY : clean   
 clean :   
-	rm -f *.o bin -r
+	rm -f *.o bin pgsql/*.gch -r
