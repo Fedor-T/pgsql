@@ -1,4 +1,4 @@
-objects = pgDriver.o  pgConnection.o Author.o pgAuthor.o
+objects = pgDriver.o  pgConnection.o Author.o pgAuthor.o Area.o pgArea.o Instance.o pgInstance.o Book.o pgBook.o
 
 links = -I /usr/include/postgresql -l pq 
 INSTDIR = bin/
@@ -20,7 +20,6 @@ libpgsql: $(objects)
 		echo "Run 'sudo make install'" ;\
 	fi
 
-
 main.o : 
 	cp Client/main.cpp pgsql/main.cpp
 	g++ -c pgsql/main.cpp  -I /usr/include/postgresql -l pq  bin/
@@ -37,6 +36,24 @@ Author.o : pgsql/Author.cpp pgsql/Author.h
 
 pgAuthor.o : pgsql/pgAuthor.cpp pgsql/pgAuthor.h 
 	g++ -fPIC -c pgsql/pgAuthor.cpp pgsql/pgAuthor.h $(links)
+
+Area.o : pgsql/Area.cpp pgsql/Area.h
+	g++ -fPIC -c pgsql/Area.cpp pgsql/Area.h $(links)
+
+Instance.o : pgsql/Instance.cpp pgsql/Instance.h
+	g++ -fPIC -c pgsql/Instance.cpp pgsql/Instance.h $(links)
+
+pgArea.o : pgsql/pgArea.cpp pgsql/pgArea.h
+	g++ -fPIC -c pgsql/pgArea.cpp pgsql/pgArea.h $(links)
+
+pgInstance.o : pgsql/pgInstance.cpp pgsql/pgInstance.h
+	g++ -fPIC -c pgsql/pgInstance.cpp pgsql/pgInstance.h $(links)
+
+Book.o : pgsql/Book.cpp pgsql/Book.h
+	g++ -fPIC -c pgsql/Book.cpp pgsql/Book.h $(links)
+
+pgBook.o : pgsql/pgBook.cpp pgsql/pgBook.h 
+	g++ -fPIC -c pgsql/pgBook.cpp pgsql/pgBook.h $(links)
 
 install:
 	cp bin/libpgsql.so /usr/lib/ 
