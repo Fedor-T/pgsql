@@ -1,0 +1,27 @@
+<h1>clone repo:</h1>
+
+<blockquote>
+	<p>git clone git@github.com:Fabel/pgsql.git<br />
+cd pgsql</p>
+</blockquote>
+
+<h1>compilation:</h1>
+
+<blockquote>
+	<p>make</p>
+</blockquote>
+
+<h1>install:</h1>
+
+<blockquote>
+	<p>sudo make install</p>
+</blockquote>
+
+<h1>run:</h1>
+
+<blockquote>
+	<p>cd bin/<br />
+./pgsql-bin</p>
+</blockquote>
+
+
