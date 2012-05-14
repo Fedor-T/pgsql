@@ -26,3 +26,32 @@ string Book::areasCondition()
 	condition<<")"<<ends;
 	return condition.str();
 }
+
+void Book::print()
+{
+	if(modelData["id"] == "0") return;
+	cout<<setw(5)<<modelData["id"]<<"|"
+		<<setw(14)<<modelData["isbn"]<<"|"
+		<<setw(14)<<modelData["title"]<<"|"
+		<<setw(14)<<modelData["publisher"]<<"|"
+		<<setw(14)<<modelData["publisher_location"]<<"|"
+		<<setw(6)<<modelData["year"]<<"|"
+		<<setw(7)<<modelData["pages"]<<"|"
+		<<setw(9)<<modelData["count"]<<"|"
+		<<setw(9)<<modelData["cost"]<<"|"
+	<<endl;
+}
+
+void Book::printHeader()
+{
+	cout<<setw(6)<<"id: |"
+		<<setw(16)<<"ISBN: |"
+		<<setw(15)<<"Title: |"
+		<<setw(15)<<"Publisher: |"
+		<<setw(15)<<"Country: |"
+		<<setw(5)<<"Year: |"
+		<<setw(5)<<"Pages: |"
+		<<setw(10)<<"Count: |"
+		<<setw(10)<<"Cost: |"
+	<<endl;
+}

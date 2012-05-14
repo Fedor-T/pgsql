@@ -8,4 +8,6 @@ public:
 	Book(data attribute);
 	string authorsCondition();
 	string areasCondition();
+	void print();
+	void printHeader();
 };

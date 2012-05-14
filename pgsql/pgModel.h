@@ -169,7 +169,7 @@ public:
 		stringstream sql;
 		sql << "SELECT column_name FROM information_schema.columns WHERE table_name='";
 		sql << tableName;
-		sql << "';";
+		sql << "' ORDER BY ordinal_position;";
 		PGresult *result = driver->selectsDataSQL(sql.str());
 		vector<string> fields;
 		int rows = PQntuples(result);
