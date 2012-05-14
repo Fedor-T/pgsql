@@ -34,7 +34,7 @@ public:
 		}while(++iterator != modelData.end());
 		cout<<")"<<endl;
 	}
-	
+
 	virtual void print()
 	{
 		data::iterator iterator = modelData.begin();
@@ -107,26 +107,16 @@ public:
 		return modelData["id"];
 	}
 
-	vector<string> getFields()
-	{
-		vector<string> result;
-		data::iterator iterator = modelData.begin();
-		result.push_back(iterator->first);
-		iterator++;
-		do
-		{
-			if(iterator->first != "id")
-			{
-				result.push_back(iterator->first);
-			}
-		}while(++iterator != modelData.end());
-		return result;
-	}
-	
 	void setId(string id)
 	{
 	  modelData["id"] = id;
 	}
+
+	bool isEmpty()
+	{
+		return (modelData.size() ? false : true);
+	}
+
 protected:
 	data modelData;
 	string modelName;

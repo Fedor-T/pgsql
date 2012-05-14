@@ -20,7 +20,7 @@ public:
 	~pgModel(void){}
 
 	int count()
-	{ 
+	{
 		return items.size();
 	}
 
@@ -89,7 +89,7 @@ public:
 		ModelName item(itemAttributes);
 		return item;
 	}
-	
+
 	bool create(ModelName &item)
 	{
 		stringstream sql;
@@ -122,7 +122,7 @@ public:
 		else
 			return false;
 	}
-	
+
 	bool destroy(int id)
 	{
 		stringstream sql;
@@ -163,9 +163,28 @@ public:
 		}
 		return items;
 	}
-	
+
+	vector<string> getFields()
+	{
+		stringstream sql;
+		sql << "SELECT column_name FROM information_schema.columns WHERE table_name='";
+		sql << tableName;
+		sql << "';";
+		PGresult *result = driver->selectsDataSQL(sql.str());
+		vector<string> fields;
+		int rows = PQntuples(result);
+		if(rows)
+			for(int i = 0; i < rows; i++) {
+				string value = PQgetvalue(result, i, 0);
+				if(value != "id") fields.push_back(value);
+			}
+		else cout<<"Table "<<tableName<<" table has no columns!"<<endl;
+		PQclear(result);
+		return fields;
+	}
+
 protected:
-  
+
 	string where(string model, string condition)
 	{
 		stringstream sql;
@@ -185,6 +204,6 @@ protected:
 		sql<<condition<<";"<<ends;
 		return sql.str();
 	}
-	
-	vector<ModelName> items;	
+
+	vector<ModelName> items;
 };

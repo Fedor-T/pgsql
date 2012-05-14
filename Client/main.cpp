@@ -14,7 +14,7 @@ int main()
 	pgConnection bdConnection;
 	pgBook bookModel(bdConnection.getDriver());
 	pgAuthor Author(bdConnection.getDriver());
-	
+
 	int choice=1;
 	while(choice)
 	{
@@ -65,7 +65,7 @@ void list(pgBook &bookModel)
 
 void addBook(pgBook &bookModel)
 {
-	vector<string> fields = bookModel.last().getFields();
+	vector<string> fields = bookModel.getFields();
 	data a;
 	string tmp;
 	vector<string>::iterator iter;
@@ -75,7 +75,7 @@ void addBook(pgBook &bookModel)
 		cin.clear();
 		cin.ignore(cin.rdbuf()->in_avail());
 		cout<<"Type "<<iter->c_str()<<": ";
-		getline(cin, tmp); 
+		getline(cin, tmp);
 		a[iter->c_str()] = tmp;
 	}
 	Book book(a);
